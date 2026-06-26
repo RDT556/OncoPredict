@@ -1,751 +1,766 @@
-# Cancer Stratification System - Complete Setup Guide
+# 🩺 OncoPredict
 
-**A comprehensive medical imaging analysis system using AI/ML for cancer risk assessment**
+### AI-Powered Cancer Risk Prediction & Clinical Decision Support System
+
+<p align="center">
+
+![React](https://img.shields.io/badge/Frontend-React%2018-61DAFB?style=for-the-badge\&logo=react)
+![Node.js](https://img.shields.io/badge/Backend-Node.js-339933?style=for-the-badge\&logo=node.js)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?style=for-the-badge\&logo=mongodb)
+![Python](https://img.shields.io/badge/AI%2FML-Python-3776AB?style=for-the-badge\&logo=python)
+![Docker](https://img.shields.io/badge/Deployment-Docker-2496ED?style=for-the-badge\&logo=docker)
+![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)
+
+</p>
+
+<p align="center">
+An intelligent healthcare platform that combines <b>Artificial Intelligence</b>, <b>Machine Learning</b>, and <b>Modern Web Technologies</b> to assist doctors and radiologists in early cancer risk assessment from medical reports and diagnostic images.
+</p>
 
 ---
 
-## Project Structure
+# 📖 Overview
 
+**OncoPredict** is a full-stack healthcare application designed to streamline the process of cancer risk assessment by integrating machine learning into the clinical workflow.
+
+The platform enables **radiologists** to upload diagnostic reports, automatically analyzes them using an AI pipeline, assists **doctors** with clinical decision-making through risk prediction and structured summaries, and allows **patients** to securely access their reports through dedicated dashboards.
+
+Instead of replacing medical professionals, OncoPredict is built as a **clinical decision support system**, helping healthcare providers prioritize high-risk cases, reduce manual workload, and improve diagnostic efficiency.
+
+The project combines a **React frontend**, **Node.js backend**, **MongoDB database**, and a **Python-based machine learning pipeline** into a unified, modular, and scalable architecture.
+
+---
+
+# 🎯 Motivation
+
+Early diagnosis significantly improves the chances of successful cancer treatment. However, hospitals often process a large number of diagnostic reports every day, making manual prioritization difficult.
+
+OncoPredict was developed to assist healthcare professionals by:
+
+* Automating medical report analysis
+* Prioritizing patients based on predicted risk
+* Reducing repetitive manual work
+* Supporting doctors with AI-assisted insights
+* Improving collaboration between radiologists, doctors, and patients
+* Providing a centralized platform for report management
+
+The objective is to make the diagnostic workflow faster, more organized, and easier to manage while ensuring that **final medical decisions always remain with healthcare professionals**.
+
+---
+
+# ✨ Key Features
+
+## 🤖 AI-Assisted Risk Prediction
+
+* Automated cancer risk prediction
+* Machine learning-based classification
+* Clinical feature extraction
+* Explainable prediction pipeline
+* Confidence score generation
+
+---
+
+## 🏥 Multi-Role Healthcare Platform
+
+The application provides dedicated dashboards for different users.
+
+### 👨‍⚕️ Radiologist
+
+* Upload diagnostic reports
+* Upload medical images
+* View pending reports
+* Track uploaded cases
+
+### 🩺 Doctor
+
+* Review AI predictions
+* Validate reports
+* Add clinical recommendations
+* Monitor assigned patients
+
+### 👤 Patient
+
+* Access medical reports
+* View prediction summaries
+* Track diagnosis history
+* Read simplified explanations
+
+---
+
+## 📄 Intelligent Report Processing
+
+The system processes uploaded reports through multiple stages including:
+
+* Medical text extraction
+* Clinical preprocessing
+* Feature generation
+* AI inference
+* Risk categorization
+* Structured report generation
+
+---
+
+## 🔒 Secure User Management
+
+* Role-based authentication
+* Protected routes
+* Separate dashboards
+* Controlled access to medical information
+
+---
+
+## 📊 Dashboard Analytics
+
+Users can monitor:
+
+* Uploaded reports
+* Pending reviews
+* Prediction results
+* Report history
+* Patient records
+
+---
+
+# 🚀 Technology Stack
+
+| Category   | Technologies                           |
+| ---------- | -------------------------------------- |
+| Frontend   | React 18, Vite, React Router, Axios    |
+| Backend    | Node.js, Express.js                    |
+| Database   | MongoDB, Mongoose                      |
+| AI/ML      | Python, BioBERT, XGBoost, PyTorch, OCR |
+| Deployment | Docker, Docker Compose, Nginx          |
+
+---
+
+# 🏗️ System Architecture
+
+```text
+                              Users
+                                 │
+        ┌────────────────────────┼────────────────────────┐
+        │                        │                        │
+        ▼                        ▼                        ▼
+   Patient                  Doctor                 Radiologist
+        │                        │                        │
+        └────────────────────────┼────────────────────────┘
+                                 │
+                                 ▼
+                      React Frontend (Vite)
+                                 │
+                      REST API (Express.js)
+                                 │
+          ┌──────────────────────┼──────────────────────┐
+          │                      │                      │
+          ▼                      ▼                      ▼
+    MongoDB Database      AI Prediction Engine    File Storage
+                                 │
+                                 ▼
+                     BioBERT + XGBoost Pipeline
 ```
-NNN_for_Cancer/
+
+The frontend communicates with the backend through REST APIs. The backend coordinates database operations, user authentication, file uploads, and communication with the machine learning pipeline. Prediction results are stored in MongoDB and delivered back to the appropriate dashboard.
+
+---
+
+# ⚙️ Core Modules
+
+The application is organized into several independent modules.
+
+| Module            | Responsibility                             |
+| ----------------- | ------------------------------------------ |
+| Authentication    | User login and role management             |
+| Report Management | Uploading and organizing medical reports   |
+| AI Prediction     | Cancer risk prediction using ML models     |
+| Dashboard         | Personalized interfaces for each user role |
+| Database          | Secure storage of reports and user data    |
+| API Layer         | Communication between frontend and backend |
+
+This modular design makes the application easier to maintain, extend, and deploy.
+
+---
+
+# 📋 Project Highlights
+
+* Full-stack MERN architecture
+* Integrated Python AI pipeline
+* RESTful API design
+* Role-based healthcare workflows
+* Modular and scalable architecture
+* Docker-based deployment support
+* Separation of frontend, backend, and AI services
+* Healthcare-oriented user experience
+
+---
+
+# 📌 Repository
+
+**GitHub Repository:**
+https://github.com/RDT556/OncoPredict
+
+---
+## 📂 Project Structure
+
+The project follows a modular architecture that separates the frontend, backend, machine learning pipeline, and documentation. This organization improves maintainability, scalability, and collaboration.
+
+```text
+OncoPredict/
+│
 ├── Code/
-│   ├── backend/                         # Node.js + Python Backend
-│   │   ├── config/                      # Configuration files
-│   │   │   └── db.js                    # MongoDB connection handler
-│   │   ├── models/                      # Mongoose database schemas
-│   │   │   ├── User.js                  # User model (patient/doctor/radiologist)
-│   │   │   └── MedicalReport.js         # Medical report with ML metadata
-│   │   ├── routes/                      # Express API endpoints
-│   │   │   ├── userRoutes.js            # User auth & management routes
-│   │   │   └── reportRoutes.js          # Report CRUD + ML integration
-│   │   ├── utils/                       # Utility functions
-│   │   │   └── mlPipeline.js            # ML pipeline integration layer
-│   │   ├── uploads/                     # Uploaded X-ray images storage
-│   │   │   ├── .gitkeep                 # Keep directory in git
-│   │   │   └── xray-*.png               # Uploaded image files
-│   │   ├── Dockerfile                   # Backend container definition
-│   │   ├── .dockerignore                # Docker build exclusions
-│   │   ├── .env                         # Environment variables
-│   │   ├── .gitignore                   # Git exclusions
-│   │   ├── server.js                    # Express server entry point
-│   │   ├── package.json                 # Node.js dependencies
-│   │   ├── package-lock.json            # Locked dependency versions
-│   │   ├── requirements.txt             # Python dependencies
-│   │   ├── risk_model.py                # Main ML pipeline (900+ lines)
-│   │   ├── train_xgboost_model.py       # XGBoost model training script
-│   │   ├── xgboost_risk_model.pkl       # Trained XGBoost model
-│   │   ├── feature_scaler.pkl           # Feature normalization scaler
-│   │   ├── mock_model.ipynb             # Jupyter notebook for testing
-│   │   ├── sample_report_high_risk.png  # Sample test image (high risk)
-│   │   ├── sample_report_medium_risk.png # Sample test image (medium risk)
-│   │   └── x-ray-test.png               # Sample test image
-│   │
-│   └── frontend/                        # React + Vite Frontend
-│       ├── public/                      # Static assets
-│       │   └── vite.svg                 # Vite logo
-│       ├── src/                         # React source code
-│       │   ├── assets/                  # Images, icons, fonts
-│       │   ├── components/              # React components (26 files)
-│       │   │   ├── Login.jsx            # Authentication screen
-│       │   │   ├── Login.css            # Login styles
-│       │   │   ├── Home.jsx             # Home page component
-│       │   │   ├── Home.css             # Home page styles
-│       │   │   ├── PatientDashboard.jsx # Patient dashboard view
-│       │   │   ├── PatientDashboard.css # Patient dashboard styles
-│       │   │   ├── PatientReportView.jsx # Patient report details
-│       │   │   ├── PatientReportView.css # Patient report styles
-│       │   │   ├── PatientFAQ.jsx       # Patient FAQ page
-│       │   │   ├── PatientFAQ.css       # FAQ styles
-│       │   │   ├── DoctorDashboard.jsx  # Doctor dashboard view
-│       │   │   ├── DoctorDashboard.css  # Doctor dashboard styles
-│       │   │   ├── DoctorReportView.jsx # Doctor report review page
-│       │   │   ├── DoctorReportView.css # Doctor report styles
-│       │   │   ├── RadiologistWorklist.jsx # Radiologist work queue
-│       │   │   ├── RadiologistWorklist.css # Worklist styles
-│       │   │   ├── RadiologistUpload.jsx # Image upload interface
-│       │   │   ├── RadiologistUpload.css # Upload styles
-│       │   │   ├── RadiologistReportInterface.jsx # Report view
-│       │   │   ├── RadiologistReportInterface.css # Report view styles
-│       │   │   ├── RadiologistArchived.jsx # Archived reports
-│       │   │   ├── RadiologistArchived.css # Archive styles
-│       │   │   ├── Reports.jsx          # General reports component
-│       │   │   ├── Reports.css          # Reports styles
-│       │   │   ├── Users.jsx            # User management component
-│       │   │   └── Users.css            # User management styles
-│       │   ├── services/                # API communication layer
-│       │   │   └── api.js               # Axios API client
-│       │   ├── App.jsx                  # Main app component with routing
-│       │   ├── App.css                  # Global app styles
-│       │   ├── index.css                # Root CSS styles
-│       │   └── main.jsx                 # React entry point
-│       ├── Dockerfile                   # Frontend container (multi-stage)
-│       ├── .dockerignore                # Docker build exclusions
-│       ├── .env                         # Frontend environment variables
-│       ├── .gitignore                   # Git exclusions
-│       ├── nginx.conf                   # Nginx web server configuration
-│       ├── package.json                 # Frontend dependencies
-│       ├── package-lock.json            # Locked dependency versions
-│       ├── vite.config.js               # Vite build configuration
-│       ├── eslint.config.js             # ESLint configuration
-│       └── index.html                   # HTML template
+│   ├── frontend/          # React + Vite frontend
+│   └── backend/           # Express.js backend + AI integration
 │
-├── Docs/                                # Project documentation & diagrams
-│   ├── sequence-diagrams/               # System workflow diagrams
-│   │   ├── AI_Model_Prediction_Pipeline.png
-│   │   ├── Complete_User_Jounney_from_upload_to_Treatment.png
-│   │   ├── Doctor_Review_AI-Generated_Report.png
-│   │   ├── patient_login_and_view_reports.png
-│   │   ├── Radiologist_upload_X-ray_Report.png
-│   │   └── Tech_Team_Monitor_AI_Model_Performance.png
-│   ├── schema.sql                       # Initial database schema
-│   ├── Architecture_design.png          # System architecture diagram
-│   ├── Entity-relation.png              # ER diagram
-│   ├── API_signture.png                 # API signature diagram
-│   ├── UML.png                          # UML diagrams
-│   ├── api.pdf                          # API documentation
-│   └── final_report.pdf                 # Complete project report
+├── Docs/                  # Project documentation & diagrams
 │
-├── docker-compose.yml                   # Docker orchestration file
-├── .env                                 # Root environment variables
-├── deploy.sh                            # Deployment automation script
-├── stop.sh                              # Stop services script
-├── backup.sh                            # Database backup script
-├── check-requirements.sh                # System requirements checker
-├── PROJECT_SETUP.md                     # This file - complete setup guide
-├── START_HERE.md                        # Quick start guide
-├── DEPLOYMENT_GUIDE.md                  # Comprehensive deployment guide
-├── DEPLOYMENT_SUMMARY.md                # Deployment overview
-└── DOCKER_README.md                     # Docker commands reference
+├── docker-compose.yml
+├── deploy.sh
+├── backup.sh
+├── stop.sh
+├── check-requirements.sh
+│
+└── README.md
 ```
 
 ---
 
-## System Overview
+# 🖥️ Frontend Architecture
 
-### Technology Stack
+The frontend is built using **React 18** with **Vite** to provide a fast and responsive user experience.
 
-**Frontend:**
-- React 18 with Hooks
-- Vite for build tooling
-- React Router DOM for navigation
-- Axios for API communication
-- CSS3 for styling
+### Responsibilities
 
-**Backend:**
-- Node.js with Express.js
-- MongoDB with Mongoose ODM
-- Multer for file uploads
-- Child Process for Python integration
-- CSV parsing for ML results
+* User Authentication
+* Dashboard Rendering
+* Report Upload
+* Report Visualization
+* API Communication
+* Navigation
+* Role-based Interface
 
-**Machine Learning:**
-- Python 3.11+
-- BioBERT (dmis-lab/biobert-v1.1) - Medical NLP
-- XGBoost - Risk classification
-- PyTesseract - OCR text extraction
-- Transformers (Hugging Face)
-- PyTorch for deep learning
-- CheXpert labeling system
+The frontend communicates exclusively with the backend through REST APIs and never interacts directly with the database.
 
-**Infrastructure:**
-- Docker & Docker Compose
-- Nginx for frontend serving
-- MongoDB 7.0
-- Linux (Fedora) deployment
+### Major Components
 
-### Key Features
-
-- **Role-Based Access Control** (Patient, Doctor, Radiologist)
-- **Automated ML Risk Assessment** (30-90 second processing)
-- **Multi-Model Ensemble** (BioBERT 40%, CheXpert 30%, XGBoost 20%, Clinical 10%)
-- **Real-time Report Analysis**
-- **Doctor Review System**
-- **Secure Authentication**
-- **Image Upload & Storage**
-- **Comprehensive Reporting**
+| Component             | Purpose                                    |
+| --------------------- | ------------------------------------------ |
+| Login                 | User authentication                        |
+| Home                  | Landing page                               |
+| Patient Dashboard     | Displays reports and prediction summaries  |
+| Doctor Dashboard      | Reviews AI predictions and patient reports |
+| Radiologist Dashboard | Uploads reports and manages worklist       |
+| Reports               | Report management                          |
+| Users                 | User management                            |
 
 ---
 
-## Quick Setup (3 Steps)
+# ⚙️ Backend Architecture
 
-### Prerequisites
-- **OS**: Fedora Linux (or any Linux with Docker support)
-- **RAM**: 4GB minimum (8GB recommended)
-- **Disk**: 10GB free space
-- **Ports**: 80, 5000, 27017 available
+The backend is developed using **Node.js** and **Express.js**, serving as the bridge between the frontend, database, and AI models.
 
-### Step 1: Install Docker
+### Responsibilities
+
+* Authentication
+* REST API
+* Business Logic
+* File Uploads
+* Report Management
+* Database Operations
+* AI Pipeline Integration
+
+Every request flows through the backend before reaching the database or machine learning pipeline.
+
+```text
+React Frontend
+       │
+       ▼
+ REST API (Express)
+       │
+ ┌─────┴──────────┐
+ │                │
+ ▼                ▼
+MongoDB      Python AI Engine
+```
+
+---
+
+# 🤖 AI & Machine Learning Pipeline
+
+One of the core features of OncoPredict is its AI-powered prediction engine.
+
+The backend invokes Python scripts to analyze uploaded medical reports and generate risk predictions.
+
+### Pipeline Workflow
+
+```text
+Medical Report
+      │
+      ▼
+OCR Extraction
+      │
+      ▼
+Clinical Text Processing
+      │
+      ▼
+BioBERT Feature Extraction
+      │
+      ▼
+Feature Engineering
+      │
+      ▼
+XGBoost Prediction
+      │
+      ▼
+Risk Classification
+      │
+      ▼
+Prediction Summary
+```
+
+### Machine Learning Components
+
+| Model          | Purpose                            |
+| -------------- | ---------------------------------- |
+| BioBERT        | Medical language understanding     |
+| XGBoost        | Cancer risk classification         |
+| OCR            | Extract text from uploaded reports |
+| Feature Scaler | Normalize model inputs             |
+
+The prediction results are stored in MongoDB and displayed on the respective dashboards.
+
+---
+
+# 🗄️ Database Design
+
+The application uses **MongoDB** with **Mongoose** for flexible and scalable document storage.
+
+### Primary Collections
+
+### Users
+
+Stores information about:
+
+* Patients
+* Doctors
+* Radiologists
+
+Typical fields include:
+
+* Name
+* Email
+* Password
+* Role
+* Hospital
+* Account Status
+
+---
+
+### Medical Reports
+
+Each uploaded report contains:
+
+* Patient Information
+* Assigned Doctor
+* Radiologist Details
+* Uploaded File
+* AI Prediction
+* Risk Score
+* Clinical Summary
+* Review Status
+* Upload Timestamp
+
+---
+
+# 🔄 System Workflow
+
+The application follows a structured workflow that mirrors real-world hospital operations.
+
+```text
+Patient Registration
+        │
+        ▼
+Radiologist Uploads Report
+        │
+        ▼
+Backend Validation
+        │
+        ▼
+AI Prediction Engine
+        │
+        ▼
+Risk Assessment Generated
+        │
+        ▼
+Doctor Reviews Report
+        │
+        ▼
+Patient Views Final Report
+```
+
+This ensures that AI assists healthcare professionals while keeping the final diagnosis under the supervision of doctors.
+
+---
+
+# 🔐 Authentication & Authorization
+
+OncoPredict follows a role-based access model.
+
+| Role        | Permissions                                       |
+| ----------- | ------------------------------------------------- |
+| Patient     | View personal reports                             |
+| Doctor      | Review AI predictions and manage assigned reports |
+| Radiologist | Upload reports and monitor worklists              |
+
+This separation ensures secure access to sensitive medical information.
+
+---
+
+# 📡 API Communication
+
+The frontend communicates with the backend using RESTful APIs.
+
+Typical operations include:
+
+```http
+POST   /login
+POST   /upload
+GET    /reports
+GET    /reports/:id
+PUT    /reports/:id
+DELETE /reports/:id
+```
+
+Each request is validated before interacting with the database or AI pipeline.
+
+---
+
+# 📦 Docker-Based Deployment
+
+The project is containerized using Docker for consistent deployment across different environments.
+
+Services include:
+
+* React Frontend
+* Express Backend
+* MongoDB Database
+
+Deployment can be started using:
 
 ```bash
-# Install Docker on Fedora
-sudo dnf -y install dnf-plugins-core
-sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+docker compose up --build
+```
 
-# Start Docker
-sudo systemctl start docker
-sudo systemctl enable docker
+---
 
-# Add user to docker group
-sudo usermod -aG docker $USER
+# 🧩 Design Principles
 
-# Apply group changes (or log out and back in)
-newgrp docker
+The project is designed around modern software engineering practices.
 
-# Verify installation
+### ✔ Modular Architecture
+
+Frontend, backend, AI models, and database are developed independently.
+
+### ✔ Separation of Concerns
+
+Each module has a clearly defined responsibility.
+
+### ✔ Scalability
+
+New AI models, dashboards, or APIs can be added without affecting existing components.
+
+### ✔ Maintainability
+
+Organized folder structure and reusable components simplify future development.
+
+### ✔ Extensibility
+
+The architecture supports future additions such as:
+
+* JWT Authentication
+* Cloud Storage
+* Notification Services
+* Admin Dashboard
+* Additional ML Models
+
+---
+
+# 🎯 Technical Highlights
+
+* MERN-based web application
+* Python-powered AI prediction pipeline
+* Role-based healthcare workflow
+* RESTful API architecture
+* Modular folder organization
+* Docker containerization
+* MongoDB document storage
+* Scalable and maintainable design
+
+---
+# 🚀 Getting Started
+
+Follow the steps below to set up and run the project locally.
+
+## Prerequisites
+
+Ensure the following software is installed on your system:
+
+* Node.js (v18 or later)
+* Python (v3.10+)
+* MongoDB
+* Docker & Docker Compose (Optional)
+* Git
+
+Verify your installation:
+
+```bash
+node -v
+npm -v
+python --version
 docker --version
-docker compose version
+git --version
 ```
-
-### Step 2: Deploy Application
-
-```bash
-cd ~/NNN_for_Cancer
-
-# Check system requirements
-./check-requirements.sh
-
-# Deploy with one command
-./deploy.sh
-```
-
-### Step 3: Access Application
-
-Open browser:
-- **Frontend**: http://localhost
-- **Backend API**: http://localhost:5000/api
-
-**Test Credentials:**
-- Patient: `patient@test.com` / `password123`
-- Doctor: `doctor@test.com` / `password123`
-- Radiologist: `radiologist@test.com` / `password123`
 
 ---
 
-## Detailed Setup Instructions
+# 📥 Clone the Repository
 
-### Option A: Docker Deployment (Recommended)
-
-**1. Clone/Navigate to Project:**
 ```bash
-cd ~/NNN_for_Cancer
+git clone https://github.com/RDT556/OncoPredict.git
+
+cd OncoPredict
 ```
 
-**2. Configure Environment:**
-```bash
-# Create environment file
-cp .env.example .env
+---
 
-# Edit if needed
-nano .env
-```
+# 📦 Backend Setup
 
-**3. Build & Deploy:**
-```bash
-# Build all Docker images
-docker compose build
+Navigate to the backend directory:
 
-# Start all services
-docker compose up -d
-
-# Check status
-docker compose ps
-
-# View logs
-docker compose logs -f
-```
-
-**4. Verify Deployment:**
-```bash
-# Test backend
-curl http://localhost:5000/api/users
-
-# Test frontend
-curl http://localhost
-
-# Access MongoDB
-docker exec -it cancer-stratification-db mongosh -u admin -p adminpassword123
-```
-
-### Option B: Manual Setup (Development)
-
-**Backend Setup:**
 ```bash
 cd Code/backend
+```
 
-# Install Node.js dependencies
+Install Node.js dependencies:
+
+```bash
 npm install
+```
 
-# Install Python dependencies
-pip3 install -r requirements.txt
+Install Python dependencies:
 
-# Install Tesseract OCR
-sudo dnf install tesseract tesseract-langpack-eng
+```bash
+pip install -r requirements.txt
+```
 
-# Create uploads directory
-mkdir -p uploads
+Create a `.env` file and configure the required environment variables.
 
-# Set environment variables
-export MONGODB_URI="mongodb://localhost:27017/cancer_stratification"
-export PORT=5000
+Start the backend server:
 
-# Start backend
+```bash
 npm start
 ```
 
-**Frontend Setup:**
+---
+
+# 🌐 Frontend Setup
+
+Navigate to the frontend directory:
+
 ```bash
 cd Code/frontend
+```
 
-# Install dependencies
+Install dependencies:
+
+```bash
 npm install
+```
 
-# Start development server
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-**Database Setup:**
-```bash
-# Install MongoDB
-sudo dnf install mongodb-org
+The frontend will be available at:
 
-# Start MongoDB
-sudo systemctl start mongod
-
-# Create database and users (use mongosh)
+```
+http://localhost:5173
 ```
 
 ---
 
-## Configuration
+# 🐳 Docker Deployment
 
-### Environment Variables (.env)
+The project also supports containerized deployment using Docker.
+
+Build and start all services:
 
 ```bash
-# MongoDB Configuration
-MONGO_ROOT_PASSWORD=your-secure-password
-MONGODB_URI=mongodb://admin:password@mongodb:27017/cancer_stratification?authSource=admin
+docker compose up --build
+```
 
-# Backend Configuration
-NODE_ENV=production
+Stop all services:
+
+```bash
+docker compose down
+```
+
+---
+
+# ⚙️ Environment Variables
+
+Example backend configuration:
+
+```env
 PORT=5000
 
-# Frontend Configuration
+MONGODB_URI=your_mongodb_connection_string
+
+NODE_ENV=development
+```
+
+Example frontend configuration:
+
+```env
 VITE_API_URL=http://localhost:5000/api
 ```
 
-### Using MongoDB Atlas (Production)
-
-```bash
-# Update .env with Atlas connection string
-MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/cancer_stratification?retryWrites=true&w=majority
-
-# Comment out MongoDB service in docker-compose.yml
-# Rebuild and deploy
-docker compose up -d --build
-```
+> Configure these variables according to your local or production environment.
 
 ---
 
-## Usage Guide
+# 🧪 Testing the Application
 
-### For Radiologists:
-1. Login at http://localhost
-2. Navigate to "Upload New Report"
-3. Select patient and doctor
-4. Upload X-ray image (JPEG/PNG, max 5MB)
-5. Wait for ML analysis (30-90 seconds)
-6. View results in worklist
+After starting all services:
 
-### For Doctors:
-1. Login and view assigned reports
-2. Reports sorted by risk score (high to low)
-3. Click "View Report" to see details
-4. Add clinical review and recommendations
-5. Save review (marks report as "reviewed")
-
-### For Patients:
-1. Login to view personal reports
-2. Toggle between Simplified and Full view
-3. See risk score with color coding:
-   - Low Risk (<30%)
-   - Moderate Risk (30-70%)
-   - High Risk (>70%)
-4. Read AI analysis and doctor's review
-5. Access FAQ for health information
+* Log in using the appropriate user role.
+* Upload a diagnostic report.
+* Allow the AI pipeline to process the report.
+* Review the generated prediction.
+* Verify that the report is stored correctly in the database.
 
 ---
 
-## ML Pipeline Architecture
+# 📈 Future Improvements
 
-### Processing Flow:
-```
-X-Ray Image Upload
-    ↓
-1. OCR Text Extraction (Tesseract)
-    ↓
-2. CheXpert Labeling (14 conditions)
-    ↓
-3. BioBERT Analysis (Medical NLP)
-    ↓
-4. Clinical Feature Extraction
-    ↓
-5. Unified Feature Vector (14 features)
-    ↓
-6. XGBoost Classification
-    ↓
-7. Ensemble Scoring
-    ↓
-Risk Score (0-100%) + Medical Summary
-```
+The current implementation establishes a strong foundation for AI-assisted clinical decision support. Future enhancements may include:
 
-### ML Components:
-
-**BioBERT (40% weight):**
-- Model: dmis-lab/biobert-v1.1
-- 768-dimensional embeddings
-- Medical text understanding
-
-**CheXpert (30% weight):**
-- 14 pathology labels
-- Keyword-based detection
-- Clinical finding identification
-
-**XGBoost (20% weight):**
-- Pre-trained classification model
-- 14-feature input vector
-- Low/Medium/High risk prediction
-
-**Clinical Features (10% weight):**
-- Age risk indicators
-- Severity markers
-- Bilateral/acute conditions
+* JWT-based authentication
+* Email notifications
+* PDF report generation
+* Cloud storage integration
+* Real-time notifications
+* Explainable AI visualizations
+* Hospital analytics dashboard
+* Appointment scheduling
+* Multi-language support
+* Model versioning
+* Audit logging
+* CI/CD pipeline integration
 
 ---
 
-## Common Operations
+# 🤝 Contributing
 
-### View Logs:
+Contributions are always welcome.
+
+If you would like to contribute:
+
+1. Fork the repository.
+2. Create a new feature branch.
+
 ```bash
-# All services
-docker compose logs -f
-
-# Specific service
-docker compose logs backend -f
-docker compose logs frontend -f
-docker compose logs mongodb -f
-
-# Last 100 lines
-docker compose logs --tail=100
+git checkout -b feature/your-feature
 ```
 
-### Restart Services:
+3. Commit your changes.
+
 ```bash
-# Restart all
-docker compose restart
-
-# Restart specific service
-docker compose restart backend
-
-# Stop all services
-docker compose down
-
-# Stop and remove volumes (WARNING: deletes data)
-docker compose down -v
+git commit -m "Add new feature"
 ```
 
-### Update Application:
-```bash
-# After code changes
-docker compose build
-docker compose up -d
+4. Push to your branch.
 
-# Force rebuild (no cache)
-docker compose build --no-cache
-docker compose up -d
+```bash
+git push origin feature/your-feature
 ```
 
-### Database Operations:
-```bash
-# Backup database
-./backup.sh
+5. Open a Pull Request.
 
-# Access MongoDB shell
-docker exec -it cancer-stratification-db mongosh -u admin -p adminpassword123
-
-# Restore from backup
-docker exec -i cancer-stratification-db mongorestore \
-  --username admin \
-  --password adminpassword123 \
-  --authenticationDatabase admin \
-  --gzip \
-  --archive < /path/to/backup.archive.gz
-```
-
-### Monitor Resources:
-```bash
-# Container status
-docker compose ps
-
-# Resource usage
-docker stats
-
-# Health checks
-curl http://localhost:5000/api/users
-curl http://localhost
-```
+Please ensure that new features are properly documented and tested.
 
 ---
 
-## Troubleshooting
+# 📚 Learning Outcomes
 
-### Issue: Permission Denied
-```bash
-# Add user to docker group
-sudo usermod -aG docker $USER
-newgrp docker
-```
+This project provided practical experience in:
 
-### Issue: Port Already in Use
-```bash
-# Check what's using the port
-sudo lsof -i :80
-sudo lsof -i :5000
-sudo lsof -i :27017
-
-# Kill process or change port in docker-compose.yml
-```
-
-### Issue: ML Pipeline Fails
-```bash
-# Check Python dependencies
-docker exec -it cancer-stratification-backend pip list
-
-# Check Tesseract
-docker exec -it cancer-stratification-backend tesseract --version
-
-# View detailed logs
-docker compose logs backend | grep -i error
-```
-
-### Issue: Frontend 404 Errors
-```bash
-# Rebuild frontend
-docker compose build frontend
-docker compose up -d frontend
-
-# Clear browser cache
-```
-
-### Issue: MongoDB Connection Failed
-```bash
-# Check MongoDB is running
-docker compose ps mongodb
-
-# Test connection
-docker exec -it cancer-stratification-backend node -e "
-const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected'))
-  .catch(err => console.error(err));
-"
-```
+* Full-Stack Web Development
+* REST API Design
+* React.js
+* Express.js
+* MongoDB
+* Machine Learning Integration
+* Medical Data Processing
+* Docker Containerization
+* Software Architecture
+* AI-assisted Healthcare Systems
 
 ---
 
-## Security Recommendations
+# 📌 Repository Structure Summary
 
-### Production Checklist:
-
-- [ ] **Change all default passwords** in `.env`
-- [ ] **Update test user credentials** in database
-- [ ] **Enable firewall:**
-  ```bash
-  sudo firewall-cmd --permanent --add-port=80/tcp
-  sudo firewall-cmd --permanent --add-port=5000/tcp
-  sudo firewall-cmd --reload
-  ```
-- [ ] **Set up HTTPS** with Let's Encrypt:
-  ```bash
-  sudo dnf install certbot python3-certbot-nginx
-  sudo certbot --nginx -d yourdomain.com
-  ```
-- [ ] **Use MongoDB Atlas** for production database
-- [ ] **Implement JWT authentication** (replace simple auth)
-- [ ] **Add rate limiting** on API endpoints
-- [ ] **Enable CORS** with specific origins only
-- [ ] **Set up monitoring** (Prometheus, Grafana)
-- [ ] **Configure log rotation**
-- [ ] **Schedule automated backups:**
-  ```bash
-  crontab -e
-  # Add: 0 2 * * * /home/user/NNN_for_Cancer/backup.sh
-  ```
+| Layer      | Technology               |
+| ---------- | ------------------------ |
+| Frontend   | React, Vite              |
+| Backend    | Node.js, Express         |
+| Database   | MongoDB                  |
+| AI/ML      | Python, BioBERT, XGBoost |
+| Deployment | Docker                   |
 
 ---
 
-## Performance Optimization
+# 💡 Why This Project?
 
-### For Better Performance:
+OncoPredict demonstrates the integration of modern web technologies with machine learning to address a real-world healthcare problem.
 
-**1. Increase Container Resources:**
-```yaml
-# In docker-compose.yml
-deploy:
-  resources:
-    limits:
-      cpus: '4'
-      memory: 8G
-```
+The project showcases:
 
-**2. Enable GPU for ML:**
-```bash
-# Install nvidia-docker
-sudo dnf install nvidia-docker2
-
-# Update docker-compose.yml backend service:
-deploy:
-  resources:
-    reservations:
-      devices:
-        - driver: nvidia
-          count: 1
-          capabilities: [gpu]
-```
-
-**3. Cache BioBERT Model:**
-- Model loads once and stays in memory
-- First request: ~30 seconds
-- Subsequent requests: ~5-10 seconds
-
-**4. Database Optimization:**
-- Add indexes on frequently queried fields
-- Use MongoDB Atlas with auto-scaling
-- Enable connection pooling
+* End-to-end full-stack development
+* AI model integration with a web application
+* RESTful API development
+* Modular architecture
+* Role-based workflows
+* Production-ready project organization
 
 ---
 
-## Monitoring & Maintenance
+# 📄 License
 
-### Health Checks:
-```bash
-# Service health
-docker compose ps
+This project is released under the **MIT License**.
 
-# Backend API health
-curl http://localhost:5000/api/users
-
-# Frontend health
-curl http://localhost
-
-# Database health
-docker exec cancer-stratification-db mongosh --eval "db.adminCommand('ping')"
-```
-
-### Regular Maintenance:
-```bash
-# Weekly: Check logs for errors
-docker compose logs --since 7d | grep -i error
-
-# Monthly: Clean up unused Docker resources
-docker system prune -a
-
-# Daily: Automated backup (via cron)
-./backup.sh
-```
+You are free to use, modify, and distribute the project in accordance with the license terms.
 
 ---
 
-## Additional Resources
+# 👨‍💻 Author
 
-### Documentation Files:
-- **START_HERE.md** - Quick start guide
-- **DEPLOYMENT_GUIDE.md** - Comprehensive deployment instructions
-- **DEPLOYMENT_SUMMARY.md** - Deployment overview
-- **DOCKER_README.md** - Docker commands reference
-- **Code/backend/README_risk_model.md** - ML model documentation
-- **Code/frontend/README.md** - Frontend development guide
+**Anuj Tiwari**
 
-### External Links:
-- [Docker Documentation](https://docs.docker.com)
-- [React Documentation](https://react.dev)
-- [MongoDB Documentation](https://docs.mongodb.com)
-- [BioBERT Paper](https://arxiv.org/abs/1901.08746)
-- [CheXpert Dataset](https://stanfordmlgroup.github.io/competitions/chexpert/)
+* GitHub: https://github.com/RDT556
 
 ---
 
-## Getting Help
+# ⭐ Support
 
-### Debug Steps:
-1. Check system requirements: `./check-requirements.sh`
-2. View logs: `docker compose logs -f`
-3. Verify services: `docker compose ps`
-4. Test connectivity: `curl http://localhost:5000/api/users`
-5. Review documentation in project root
+If you found this project helpful, consider giving it a **⭐ Star** on GitHub.
 
-### Common Commands:
-```bash
-# Complete restart
-docker compose down && docker compose up -d
-
-# View specific service logs
-docker compose logs [service-name] --tail=50 -f
-
-# Execute command in container
-docker exec -it cancer-stratification-backend bash
-
-# Check container resources
-docker stats cancer-stratification-backend
-```
+It helps others discover the project and motivates future development.
 
 ---
 
-## License & Credits
+<p align="center">
 
-**Project**: Cancer Stratification System using AI/ML
-**Version**: 1.0.0
-**Last Updated**: November 16, 2025
+**Built with ❤️ using React, Node.js, MongoDB, Python, and Machine Learning**
 
-**Technologies Used:**
-- React, Node.js, Python, MongoDB
-- BioBERT, XGBoost, PyTesseract
-- Docker, Nginx
-
-**Setup Created**: November 16, 2025
-
----
-
-## Quick Command Reference
-
-```bash
-# Deploy everything
-./deploy.sh
-
-# Stop everything
-./stop.sh
-
-# Check system
-./check-requirements.sh
-
-# Backup database
-./backup.sh
-
-# View logs
-docker compose logs -f
-
-# Restart services
-docker compose restart
-
-# Update after changes
-docker compose build && docker compose up -d
-
-# Access application
-firefox http://localhost
-```
-
----
-
-**Ready to Deploy! Follow the Quick Setup section above to get started.**
-
-For detailed instructions, see **START_HERE.md** or **DEPLOYMENT_GUIDE.md**
+</p>
